@@ -22,9 +22,18 @@ class PrductSchema extends Schema {
       table.foreign('image_id').reference('id').inTable('images').onDelete('cascade')
       table.foreign('product_id').reference('id').inTable('products').onDelete('cascade')
     })
+
+    this.create('category_product',(table)=>{
+      table.increments()
+      table.integer('product_id').unsigne()
+      table.integer('category_id').unsigne()
+      table.foreign('product_id').reference('id').inTable('products').onDelete('cascade')
+      table.foreign('category_id').reference('id').inTable('categories').onDelete('cascade')
+    })
   }
 
   down () {
+    this.drop('category_product')
     this.drop('image_product')
     this.drop('prducts')
   }
